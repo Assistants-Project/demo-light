@@ -1,0 +1,6 @@
+[demo-light]
+ssid = "your Wi-Fi SSID"
+password = "your Wi-Fi password"
+broker_address = "your broker address"
+# A typical port for a broker
+broker_port = 1883
