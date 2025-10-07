@@ -1,0 +1,88 @@
+[package]
+name = "demo-light"
+version = "0.1.0"
+rust-version = "1.90"
+edition = "2024"
+authors = ["Alex Leonte <m.alex.leonte@gmail.com>"]
+description = "A light control firmware."
+license = "MIT"
+
+[[bin]]
+name = "demo-light"
+test = false
+doctest = false
+bench = false
+
+[dependencies]
+tosca.version = "0.1.0"
+tosca.default-features = false
+
+tosca-drivers.version = "0.1.0"
+
+tosca-esp32c3 = "0.1.0"
+
+# Embassy framework
+embassy-executor.version = "0.9.1"
+embassy-executor.features = ["log"]
+
+embassy-net.version = "0.7.1"
+embassy-net.features = ["dhcpv4", "log", "medium-ethernet", "tcp", "udp"]
+
+embassy-sync.version = "0.7.2"
+
+embassy-time.version = "0.5.0"
+embassy-time.features = ["log"]
+
+embassy-embedded-hal = "0.5.0"
+
+# Esp dependencies
+esp-alloc.version = "0.9.0"
+
+esp-bootloader-esp-idf.version = "0.4.0"
+esp-bootloader-esp-idf.features = ["esp32c3", "log-04"]
+
+esp-hal.version = "1.0.0"
+esp-hal.features = ["esp32c3", "log-04", "unstable"]
+
+esp-rtos.version = "0.2.0"
+esp-rtos.features = ["embassy", "esp-alloc", "esp-radio", "esp32c3", "log-04"]
+
+esp-println.version = "0.16.1"
+esp-println.features = ["esp32c3", "log-04"]
+
+esp-radio.version = "0.17.0"
+esp-radio.features = ["esp-alloc", "esp32c3", "log-04", "wifi"]
+
+# Logging utilities
+log.version = "0.4.28"
+
+# Static cell
+static_cell.version = "2.1.1"
+
+# Toml dependency
+toml-cfg.version = "0.2.0"
+toml-cfg.default-features = false
+
+# Display dependencies
+embedded-graphics.version = "0.8.1"
+
+ssd1306.version = "0.10.0"
+ssd1306.features = ["async"]
+
+[build-dependencies]
+toml-cfg.version = "0.2.0"
+toml-cfg.default-features = false
+
+[profile.dev]
+# Rust debug is too slow.
+# For debug builds always builds with some optimization
+opt-level = "s"
+
+[profile.release]
+codegen-units    = 1     # LLVM can perform better optimizations using a single thread
+debug            = 2
+debug-assertions = false
+incremental      = false
+lto              = 'fat'
+opt-level        = 's'
+overflow-checks  = false
